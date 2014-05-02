@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+	<xs:simpleType name="ClusterID" id="ClusterID">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="0x[0-9a-fA-F]{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ManufacturerID" id="ManufacturerID">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="0x[0-9a-fA-F]{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AttrID" id="AttrID">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="0x[0-9a-fA-F]{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="clusters">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="cluster" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cluster">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="1" ref="server" />
+				<xs:element minOccurs="0" maxOccurs="1" ref="client" />
+			</xs:sequence>
+			<xs:attribute name="id" use="required" type="ClusterID" />
+			<xs:attribute name="manufacturerCode" type="ManufacturerID" />
+			<xs:attribute name="name" use="required" />
+			<xs:attribute name="package" use="required" type="xs:NCName" />
+			<xs:attribute name="status" type="xs:NCName" default="u" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="client">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute" />
+				<xs:element maxOccurs="unbounded" ref="command" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="server">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="command" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="attribute">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="Range" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="item" />
+			</xs:sequence>
+			<xs:attribute name="access" type="xs:NCName" default="r" />
+			<xs:attribute name="default" />
+			<xs:attribute name="factor" type="xs:integer" />
+			<xs:attribute name="id" use="required" type="AttrID" />
+			<xs:attribute name="mandatory" type="xs:boolean" />
+			<xs:attribute name="name" use="required" />
+			<xs:attribute name="reportable" type="xs:boolean"
+				default="true" />
+			<xs:attribute name="size" type="xs:integer" />
+			<xs:attribute name="type" use="required" type="xs:NCName" />
+			<xs:attribute name="uom" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Range">
+		<xs:complexType>
+			<xs:attribute name="from" use="required" type="xs:NMTOKEN" />
+			<xs:attribute name="to" type="xs:NMTOKEN" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="command">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="payload" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="param" />
+			</xs:choice>
+			<xs:attribute name="id" use="required" type="xs:NMTOKEN" />
+			<xs:attribute name="mandatory" type="xs:boolean" use="optional"
+				default="true" />
+			<xs:attribute name="name" use="required" />
+			<xs:attribute name="response" type="xs:boolean" />
+			<xs:attribute name="response_name" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="payload">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="param" />
+				<xs:choice minOccurs="0">
+					<xs:element ref="field" />
+					<xs:element ref="record" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="record">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element maxOccurs="unbounded" ref="field" />
+				<xs:element maxOccurs="unbounded" ref="param" />
+			</xs:choice>
+			<xs:attribute name="fieldname" use="required" type="xs:NCName" />
+			<xs:attribute name="name" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="item">
+		<xs:complexType>
+			<xs:attribute name="id" use="required" type="xs:NMTOKEN" />
+			<xs:attribute name="name" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="param">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="enum" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="value" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="item" />
+			</xs:choice>
+			<xs:attribute name="generate" type="xs:boolean" />
+			<xs:attribute name="mandatory" type="xs:boolean" />
+			<xs:attribute name="name" use="required" />
+			<xs:attribute name="type" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="enum">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="item" />
+			</xs:sequence>
+			<xs:attribute name="end" type="xs:integer" />
+			<xs:attribute name="start" type="xs:integer" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="value">
+		<xs:complexType>
+			<xs:attribute name="desc" />
+			<xs:attribute name="id" use="required" type="xs:NMTOKEN" />
+			<xs:attribute name="name" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="field">
+		<xs:complexType>
+			<xs:attribute name="name" use="required" type="xs:NCName" />
+			<xs:attribute name="type" use="required" type="xs:NCName" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

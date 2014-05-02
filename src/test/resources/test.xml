@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This file is part of JEMMA - http://jemma.energy-home.org
+    (C) Copyright 2014 Telecom Italia (http://www.telecomitalia.it)
+
+    JEMMA is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License (LGPL) version 3
+    or later as published by the Free Software Foundation, which accompanies
+    this distribution and is available at http://www.gnu.org/licenses/lgpl.html
+
+    JEMMA is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License (LGPL) for more details.
+-->
+<clusters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="zcl.xsd">
+
+    <cluster id="0x0000" name="Test1" package="general" status="c">
+    	<server>
+	        <attribute id="0x0000" name="ServerAttribute1RO" type="uint8" default="0x00">
+	            <Range from="0x00" to="0xFF"/>
+			</attribute>
+	        <attribute id="0x0001" name="ServerAttribute2RW" type="uint8" access="rw" default="0x00" mandatory="false">
+	            <Range from="0x00" to="0x03"/>
+	        </attribute>
+	        <attribute id="0x0002" name="ServerAttribute3RW" type="uint8" access="rw" default="0x00">
+	            <Range from="0x00" to="0x03"/>
+	        </attribute>		        	        
+ 	    	<command id="0x00" name="Command1">
+	            <payload>
+	                <param name="Param1" type="uint16"/>
+	            </payload>
+ 	        </command>
+ 	    	<command id="0x01" name="Command2" response_name="Command2Response"/>	               
+ 		</server>  
+ 		<client>
+	        <attribute id="0x0001" name="ClientAttribute1RW" type="uint8" access="rw" default="0x00">
+	            <Range from="0x00" to="0x03"/>
+	        </attribute>
+	        <attribute id="0x0002" name="ClientAttribute1RO" type="uint8" access="r" default="0x00">
+	            <Range from="0x00" to="0x03"/>
+	        </attribute>	        	
+  	    	<command id="0x00" name="Command2Response" response="true">
+	            <payload>
+	                <param name="Param1" type="uint16"/>
+	            </payload> 	        
+ 	        </command>    		
+ 		</client>
+    </cluster>
+</clusters>
