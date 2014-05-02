@@ -15,13 +15,6 @@ The full JEMMA source code, unless specified otherwise in specific files, have b
 
 JEMMA is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-### Build
-
-In order to build the project follow these steps.
-
-1. Checkout the repository
-2. cd in the 
-
 ### Getting the code
 
 To get the you can type:
@@ -68,19 +61,24 @@ To install the compiler somewhere else you need to
 
 ### Generate the classes from the cluster descriptions
 
-For generating the classes and interfaces sources issue the following command from the jemma.ah.zigbee.zcl.generator:
+For generating the interfaces sources issue the following command from the jemma.ah.zigbee.zcl.compiler:
 
-java -jar jemma.ah.zigbee.zcl.compiler-<version>.jar -m common -s <ZCL description file> -o <output dir> -i org.energy_home.jemma.ah.cluster.zigbee -c OnOff
+	java -jar jemma.ah.zigbee.zcl.compiler-<version>.jar -m common -s <ZCL description file> -o <output dir> -i org.energy_home.jemma.ah.cluster.zigbee -c OnOff
 
 Where: 
 	 <ZCL description file> file where the OnOff cluster is defined
 
 In order to generate the marshalling/unmarshalling classes (see the jemma project jemma.osgi.ah.zigbee) issue the following command:
 
-java -jar jemma.ah.zigbee.zcl.generator-<version>.jar -m zcl -s <ZCL description file> -o <output dir> -z org.energy_home.jemma.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
+	java -jar jemma.ah.zigbee.zcl.generator-<version>.jar -m zcl -s <ZCL description file> -o <output dir> -z org.energy_home.jemma.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
 
-java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m common -s test.xml -o .\output -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
-java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m zcl -s test.xml -o .\output -z org.energy_home.jemma.ah.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
+For instance, under Windows, to generate the interfaces issue:
+
+	java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m common -s test.xml -o .\output -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
+
+To generate the marshalling/unmarshalling classes:
+
+	java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m zcl -s test.xml -o .\output -z org.energy_home.jemma.ah.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
 
 ### XML description files
 
@@ -88,9 +86,9 @@ These files describes the ZCL clusters. zcl.xsd contains the schema to be used f
 
 The <cluster> xml tag permits to specify a "status" attribute that is used by the generator in this way:
  
-  * "u" means that the cluster definition is still work In progress.
-  * "c" means that the cluster definition is complete.
-  * "t" means that the cluster definition is complete but not tested, yet.
+* "u" means that the cluster definition is still work In progress.
+* "c" means that the cluster definition is complete.
+* "t" means that the cluster definition is complete but not tested, yet.
 
 The generator generates only those classes and interfaces that has the status attribute set to "c" or "t". The default value for the "status" attribute is "u".
   
