@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	elementFormDefault="qualified">
+<!--
+    This file is part of JEMMA - http://jemma.energy-home.org
+    (C) Copyright 2014 Telecom Italia (http://www.telecomitalia.it)
+
+    JEMMA is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License (LGPL) version 3
+    or later as published by the Free Software Foundation, which accompanies
+    this distribution and is available at http://www.gnu.org/licenses/lgpl.html
+
+    JEMMA is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License (LGPL) for more details.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<xs:simpleType name="ClusterID" id="ClusterID">
 		<xs:restriction base="xs:token">
 			<xs:pattern value="0x[0-9a-fA-F]{4}" />
@@ -64,8 +77,7 @@
 			<xs:attribute name="id" use="required" type="AttrID" />
 			<xs:attribute name="mandatory" type="xs:boolean" />
 			<xs:attribute name="name" use="required" />
-			<xs:attribute name="reportable" type="xs:boolean"
-				default="true" />
+			<xs:attribute name="reportable" type="xs:boolean" default="true" />
 			<xs:attribute name="size" type="xs:integer" />
 			<xs:attribute name="type" use="required" type="xs:NCName" />
 			<xs:attribute name="uom" />
@@ -84,8 +96,7 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="param" />
 			</xs:choice>
 			<xs:attribute name="id" use="required" type="xs:NMTOKEN" />
-			<xs:attribute name="mandatory" type="xs:boolean" use="optional"
-				default="true" />
+			<xs:attribute name="mandatory" type="xs:boolean" use="optional" default="true" />
 			<xs:attribute name="name" use="required" />
 			<xs:attribute name="response" type="xs:boolean" />
 			<xs:attribute name="response_name" />
