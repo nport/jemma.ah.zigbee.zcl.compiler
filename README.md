@@ -1,5 +1,5 @@
-jemma.zigbee.clusters.compiler
-==============================
+jemma.ah.zigbee.zcl.compiler
+============================
 
 This project is part of JEMMA (https://github.com/ismb/jemma).
 
@@ -26,19 +26,19 @@ In order to build the project follow these steps.
 
 To get the you can type:
 
-	git clone https://github.com/nport/jemma.zigbee.zcl.generator.git 
+	git clone https://github.com/nport/jemma.ah.zigbee.zcl.compiler.git 
 
-### Compile the Jemma ZCL Classes generator
+### Build the Jemma ZCL clusters compiler
 
 To compile the code and generate the Eclipse projects you need Maven 3.x installed on your machine
 
-To generate eclipse project, run the command below from the git workspace:
+To generate Eclipse project, run the command below from the git workspace:
 
 	mvn clean package eclipse:eclipse -D eclipse.pde 
 
 ### Import the Eclipse project
 
-This section will help you importing project you've generated at the previous step with Maven, into your eclipse workspace.
+This section will help you importing project you've generated at the previous step with Maven, into your Eclipse workspace.
 
 To debug the project in Eclipse, you need to issue the following command, that adds the M2_REPO variable to the workspace:
 
@@ -53,24 +53,24 @@ Then, open the Eclipse workspace and follows these steps:
 3. Select the git workspace root as the root for the project.
 5. Click "Finish".
 
-### Run the generator
+### Run the compiler
 
-In order to run the generator issue the above step "Compile the JEMMA ZCL Classes generator" and cd in the target directory. Then move to step "Generate the sourcecode" below.
+In order to run the compiler, issue the above step "Compile the JEMMA ZCL Classes Compiler" and cd in the target directory. Then move to step "Generate the sourcecode" below.
 
-### Installing the generator
+### Installing the compiler
 
-To install the generator somewhere else you need to 
-1. copy the main jar target/jemma.ah.zigbee.zcl.generator-<version>.jar somewhere in your filesystem (let say <generator-dir>).
+To install the compiler somewhere else you need to 
+1. copy the main jar target/jemma.ah.zigbee.zcl.compiler-<version>.jar somewhere in your filesystem (let say <compilerr-dir>).
 
 2. Put the codemodel-2.6.jar and java-getopt-1.0.9.jar libraries into your JVM classpath. A good place where to copy them is inside JRE installation directory, under the lib/ext folder. You can also put these libraries under <generator-dir>/libs, since the MANIFEST.MF file inside the generator jarfile, adds the libs directory to the jar classpath.
 
-4. Open a command console and cd in the <generator-dir> directory.
+4. Open a command console and cd in the <compiler-dir> directory.
 
-### Generate the sourcecode
+### Generate the classes from the cluster descriptions
 
 For generating the classes and interfaces sources issue the following command from the jemma.ah.zigbee.zcl.generator:
 
-java -jar jemma.ah.zigbee.zcl.generator-<version>.jar -m common -s <ZCL description file> -o <output dir> -i org.energy_home.jemma.ah.cluster.zigbee -c OnOff
+java -jar jemma.ah.zigbee.zcl.compiler-<version>.jar -m common -s <ZCL description file> -o <output dir> -i org.energy_home.jemma.ah.cluster.zigbee -c OnOff
 
 Where: 
 	 <ZCL description file> file where the OnOff cluster is defined
@@ -79,8 +79,8 @@ In order to generate the marshalling/unmarshalling classes (see the jemma projec
 
 java -jar jemma.ah.zigbee.zcl.generator-<version>.jar -m zcl -s <ZCL description file> -o <output dir> -z org.energy_home.jemma.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
 
-java -jar  jemma.ah.zigbee.zcl.generator-2.0.13-SNAPSHOT.jar -m common -s test.xml -o .\output -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
-java -jar  jemma.ah.zigbee.zcl.generator-2.0.13-SNAPSHOT.jar -m zcl -s test.xml -o .\output -z org.energy_home.jemma.ah.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
+java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m common -s test.xml -o .\output -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
+java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m zcl -s test.xml -o .\output -z org.energy_home.jemma.ah.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
 
 ### XML description files
 
@@ -106,7 +106,7 @@ Tag <command>
   
 ### Inportant Notes
 
-The java interfaces and classes created by the generator are compatibile with Jemma 0.1.*.
+The java interfaces and classes created by the compiler are compatibile with Jemma version 0.1.1 or earlier.
 
 The tool has the following limitations:
 	* No support for commands with variable fields

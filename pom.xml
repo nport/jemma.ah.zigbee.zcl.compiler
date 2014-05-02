@@ -18,10 +18,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.energy-home</groupId>
-	<artifactId>jemma.ah.zigbee.zcl.generator</artifactId>
+	<artifactId>jemma.ah.zigbee.zcl.compiler</artifactId>
 	<packaging>jar</packaging>
 	<version>2.0.13-SNAPSHOT</version>
-	<name>ZCL classes generator for Jemma</name>
+	<name>Cluster definitions compiler for Jemma</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<jdk.version>1.6</jdk.version>
