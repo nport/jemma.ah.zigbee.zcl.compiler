@@ -44,22 +44,23 @@ Then, open the Eclipse workspace and follows these steps:
 1. Select "Import..." from "File" menu.
 2. Select "General" -> "Existing Projects into Workspace"
 3. Select the git workspace root as the root for the project.
-5. Click "Finish".
+4. Click "Finish".
 
 ### Run the compiler
 
-In order to run the compiler, issue the above step "Compile the JEMMA ZCL Classes Compiler" and cd in the target directory. Then move to step "Generate the sourcecode" below.
+In order to run the compiler, issue the above step "Build the Jemma ZCL clusters compiler" and cd in the target directory. Then jump to the "Generate the classes from the ZCL clusters descriptions" section below.
 
 ### Installing the compiler
 
-To install the compiler somewhere else you need to 
+To install the compiler somewhere else you need to: 
+
 1. copy the main jar target/jemma.ah.zigbee.zcl.compiler-<version>.jar somewhere in your filesystem (let say <compilerr-dir>).
 
 2. Put the codemodel-2.6.jar and java-getopt-1.0.9.jar libraries into your JVM classpath. A good place where to copy them is inside JRE installation directory, under the lib/ext folder. You can also put these libraries under <generator-dir>/libs, since the MANIFEST.MF file inside the generator jarfile, adds the libs directory to the jar classpath.
 
-4. Open a command console and cd in the <compiler-dir> directory.
+3. Open a command console and cd in the <compiler-dir> directory.
 
-### Generate the classes from the cluster descriptions
+### Generate the classes from the ZCL clusters descriptions
 
 For generating the interfaces sources issue the following command from the jemma.ah.zigbee.zcl.compiler:
 
@@ -80,9 +81,9 @@ To generate the marshalling/unmarshalling classes:
 
 	java -jar  jemma.ah.zigbee.zcl.compiler-2.0.13-SNAPSHOT.jar -m zcl -s test.xml -o output -z org.energy_home.jemma.ah.zigbee.zcl.cluster -i org.energy_home.jemma.ah.cluster.zigbee -c Test1
 
-### XML description files
+### ZCL description files
 
-These files describes the ZCL clusters. zcl.xsd contains the schema to be used for these files. The test.xml file under the resources folder shows some valid examples.
+These files describes the structure of ZCL clusters in terms of attributes and commands. zcl.xsd contains the schema to be used for these files. The test.xml file under the project resources folder shows some examples.
 
 The <cluster> xml tag permits to specify a "status" attribute that is used by the generator in this way:
  
@@ -101,8 +102,9 @@ Tag <attribute>:
 
 Tag <command>
 	mandatory = "true"
+
   
-### Inportant Notes
+### Important Notes
 
 The java interfaces and classes created by the compiler are compatibile with Jemma version 0.1.1 or earlier.
 
